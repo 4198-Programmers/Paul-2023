@@ -4,13 +4,34 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DriveTrain extends SubsystemBase {
+  private CANSparkMax frontLeftMotor = new CANSparkMax( 2, MotorType.kBrushless);
+  private CANSparkMax frontRightMotor = new CANSparkMax( 3, MotorType.kBrushless);
+  private CANSparkMax backLeftMotor = new CANSparkMax( 1, MotorType.kBrushless);
+  private CANSparkMax backRightMotor = new CANSparkMax( 6, MotorType.kBrushless);
+
+  private RelativeEncoder frontLeftEncoder = frontLeftMotor.getEncoder();
+  private RelativeEncoder frontRightEncoder = frontRightMotor.getEncoder();
+  private RelativeEncoder backLeftEncoder = backLeftMotor.getEncoder();
+  private RelativeEncoder backRightEncoder = backRightMotor.getEncoder();
+
+  private MotorControllerGroup left = new MotorControllerGroup(frontLeftMotor, backLeftMotor);
+  private MotorControllerGroup right = new MotorControllerGroup(frontRightMotor, backRightMotor);
+
+  private DifferentialDrive driveTrain = new DifferentialDrive(left, right); 
+
   /** Creates a new ExampleSubsystem. */
   public DriveTrain() {
-    public 
+    
 
 
   }
