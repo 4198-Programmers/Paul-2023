@@ -11,10 +11,11 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class IntakeSubsystem extends SubsystemBase {
-  private CANSparkMax frontRightMotor = new CANSparkMax(4, MotorType.kBrushless);
-  private CANSparkMax backLeftMotor = new CANSparkMax(5, MotorType.kBrushless);
+  private CANSparkMax frontRightMotor = new CANSparkMax(Constants.Motor.frontRightMotor, MotorType.kBrushless);
+  private CANSparkMax backLeftMotor = new CANSparkMax(Constants.Motor.backLeftMotor, MotorType.kBrushless);
 
   // private RelativeEncoder frontRightEncoder = frontRightMotor.getEncoder();
   // private RelativeEncoder backLeftEncoder = backLeftMotor.getEncoder();
