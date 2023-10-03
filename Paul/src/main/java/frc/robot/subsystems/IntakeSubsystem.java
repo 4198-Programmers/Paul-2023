@@ -48,4 +48,10 @@ public class IntakeSubsystem extends SubsystemBase {
   public void stop() {
     this.frontRightMotor.set(0);
   }
+
+public void ejectRight() {
+}
+
+public void ejectLeft() {
+}
 }
