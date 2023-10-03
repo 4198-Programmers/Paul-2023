@@ -30,11 +30,16 @@ public class DriveTrain extends SubsystemBase {
 
   private DifferentialDrive driveTrain = new DifferentialDrive(left, right); 
 
+
   /** Creates a new ExampleSubsystem. */
   public DriveTrain() {
     
+  
 
+  }
 
+  public void drive(double left, double right){
+    
   }
 
   /**
