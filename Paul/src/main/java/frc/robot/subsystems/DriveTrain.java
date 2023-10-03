@@ -12,12 +12,13 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class DriveTrain extends SubsystemBase {
-  private CANSparkMax frontLeftMotor = new CANSparkMax( 2, MotorType.kBrushless);
-  private CANSparkMax frontRightMotor = new CANSparkMax( 3, MotorType.kBrushless);
-  private CANSparkMax backLeftMotor = new CANSparkMax( 1, MotorType.kBrushless);
-  private CANSparkMax backRightMotor = new CANSparkMax( 6, MotorType.kBrushless);
+  private CANSparkMax frontLeftMotor = new CANSparkMax(Constants.FRONTLEFTMOTOR, MotorType.kBrushless);
+  private CANSparkMax frontRightMotor = new CANSparkMax(Constants.FRONTRIGHTMOTOR, MotorType.kBrushless);
+  private CANSparkMax backLeftMotor = new CANSparkMax(Constants.BACKLEFTMOTOR, MotorType.kBrushless);
+  private CANSparkMax backRightMotor = new CANSparkMax(Constants.BACKRIGHTMOTOR, MotorType.kBrushless);
 
   private RelativeEncoder frontLeftEncoder = frontLeftMotor.getEncoder();
   private RelativeEncoder frontRightEncoder = frontRightMotor.getEncoder();
