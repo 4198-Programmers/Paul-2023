@@ -12,22 +12,14 @@ public class EjectCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final IntakeSubsystem intakeSubsystem;
 
-public enum Direction {
-  LEFT, 
-  RIGHT,
-}
-
-private Direction direction;
-}
-
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public EjectCommand(IntakeSubsystem subsystem,Direction direction) {
+  public EjectCommand(IntakeSubsystem subsystem) {
     intakeSubsystem = subsystem;
-    this.direction = direction;
+  
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -35,17 +27,11 @@ private Direction direction;
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {}
-
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(this.direction == Direction.LEFT){
-      this.intakeSubsystem.ejectLeft();
-    }
-    else if(this.direction == Direction.RIGHT){
-      this.intakeSubsystem.ejectRight();
-    }
-  }
+      this.intakeSubsystem.eject();
+    } 
 
   // Called once the command ends or is interrupted.
   @Override

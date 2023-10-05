@@ -31,7 +31,7 @@ public class IntakeSubsystem extends SubsystemBase {
     this.frontRightMotor.set(speed);
   }
 
-  public void out() {
+  public void eject() {
     this.frontRightMotor.set(-speed);
   }
 
@@ -48,10 +48,4 @@ public class IntakeSubsystem extends SubsystemBase {
   public void stop() {
     this.frontRightMotor.set(0);
   }
-
-public void ejectRight() {
-}
-
-public void ejectLeft() {
-}
 }
