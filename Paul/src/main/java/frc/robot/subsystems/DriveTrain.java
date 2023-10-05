@@ -34,8 +34,6 @@ public class DriveTrain extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   public DriveTrain() {
     
-  
-
   }
 
   public void drive(double left, double right){
