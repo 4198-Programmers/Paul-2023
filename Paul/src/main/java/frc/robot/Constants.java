@@ -17,7 +17,9 @@ public final class Constants {
     public static final int kDriverControllerPort = 0;
   }
   public static class Motor{
-    public static final int frontRightMotor = 4;
-    public static final int backLeftMotor = 5;
+    public static final int frontRightMotor = 3;
+    public static final int backLeftMotor = 1;
+    public static final int frontLeftMotor = 2; 
+    public static final int backRightMotor = 6;
   }
 }
