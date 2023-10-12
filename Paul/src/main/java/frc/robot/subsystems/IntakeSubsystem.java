@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class IntakeSubsystem extends SubsystemBase {
+public class IntakeSubsystem extends SubsystemBase implements AutoCloseable {
   private CANSparkMax frontRightMotor = new CANSparkMax(Constants.Motor.frontRightMotor, MotorType.kBrushless);
   private CANSparkMax backLeftMotor = new CANSparkMax(Constants.Motor.backLeftMotor, MotorType.kBrushless);
 
@@ -47,5 +47,11 @@ public class IntakeSubsystem extends SubsystemBase {
 
   public void stop() {
     this.frontRightMotor.set(0);
+  }
+
+  @Override
+  public void close() throws Exception {
+    this.frontRightMotor.close();
+    this.backLeftMotor.close();
   }
 }
