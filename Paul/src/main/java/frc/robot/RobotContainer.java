@@ -53,7 +53,7 @@ public class RobotContainer {
     m_driverController.leftBumper().whileTrue(new EjectCommand(this.intake));
     m_driverController.rightBumper().whileTrue(new LoadCommand(this.intake));
   }
-
+//robot understands that it is turning on, controler is working
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
