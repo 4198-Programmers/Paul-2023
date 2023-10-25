@@ -30,6 +30,8 @@ public class DriveTrain extends SubsystemBase {
 
   private DifferentialDrive driveTrain = new DifferentialDrive(left, right); 
 
+  private boolean invertedDrive(left * -1, right * -1);
+
 
   /** Creates a new ExampleSubsystem. */
   public DriveTrain() {
@@ -39,6 +41,9 @@ public class DriveTrain extends SubsystemBase {
   public void drive(double left, double right){
     driveTrain.tankDrive(left, right);
   }
+
+  public void driveInvert()
+  
 
   /**
    * Example command factory method.
