@@ -28,6 +28,7 @@ public class RobotContainer {
   private final DriveTrain drive = new DriveTrain();
 
   private final DriveCommand joystickDriveCommand = new DriveCommand(drive, ()->{return m_driverController.getLeftY();}, ()->{return m_driverController.getRightY();});
+  SmartDashboard.putNumber("LeftJoystick Y value", m_driverController.getLeftY(););
 
   
 
