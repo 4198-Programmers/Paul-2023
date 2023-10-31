@@ -33,7 +33,8 @@ public class DriveTrain extends SubsystemBase {
 
   /** Creates a new ExampleSubsystem. */
   public DriveTrain() {
-    
+    this.backLeftMotor.setInverted(true);
+    this.frontLeftMotor.setInverted(true);
   }
 
   public void drive(double left, double right){
