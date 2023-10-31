@@ -38,6 +38,8 @@ public class RobotContainer {
     drive.setDefaultCommand(joystickDriveCommand);
     // Configure the trigger bindings
     configureBindings();
+    m_driverController.button(kA).onTrue();
+//fix
   }
 
   /**
