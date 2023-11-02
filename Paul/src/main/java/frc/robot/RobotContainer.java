@@ -8,6 +8,7 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.LoadCommand;
 import frc.robot.commands.EjectCommand;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.commands.AdjustSpeedCommand;
 import frc.robot.commands.Autos;
 import frc.robot.commands.DriveCommand;
 import frc.robot.subsystems.DriveTrain;
@@ -53,6 +54,9 @@ public class RobotContainer {
   private void configureBindings() {
     m_driverController.leftBumper().whileTrue(new EjectCommand(this.intake));
     m_driverController.rightBumper().whileTrue(new LoadCommand(this.intake));
+
+    m_driverController.povUp().onTrue(new AdjustSpeedCommand(this.drive, Constants.Motor.driveSpeedStep));
+    m_driverController.povDown().onTrue(new AdjustSpeedCommand(this.drive, -Constants.Motor.driveSpeedStep));
   }
 //robot understands that it is turning on, controler is working
   /**
