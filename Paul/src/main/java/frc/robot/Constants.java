@@ -22,6 +22,10 @@ public final class Constants {
     public static final int frontLeftMotor = 6; 
     public static final int backRightMotor = 4;
 
+    public static final double maximumDriveSpeed = 1.0f;
+    public static final double minimumDriveSpeed = 0.2f;
+    public static final double driveSpeedStep = 0.1f;
+
     public static final int intakeFrontMotor = 2;
     public static final int intakeBackMotor = 3;
   }
