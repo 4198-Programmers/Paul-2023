@@ -8,6 +8,8 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -29,16 +31,18 @@ public class DriveTrain extends SubsystemBase {
   private MotorControllerGroup right = new MotorControllerGroup(frontRightMotor, backRightMotor);
 
   private DifferentialDrive driveTrain = new DifferentialDrive(left, right); 
-
   public boolean driveInvert = true; 
   private double currentSpeed;
+  private SlewRateLimiter slewRateLimiter; 
 
   /** Creates a new ExampleSubsystem. */
   public DriveTrain() {
     this.backLeftMotor.setInverted(true);
     this.frontLeftMotor.setInverted(true);
     this.currentSpeed = Constants.Motor.maximumDriveSpeed;
+    this.slewRateLimiter = new SlewRateLimiter(Constants.Motor.slewRateLimit, -Constants.Motor.slewRateLimit, 0);
   }
+
 
   public void drive(double left, double right){
     driveTrain.tankDrive(applySpeed(left), applySpeed(right));
@@ -49,7 +53,7 @@ public class DriveTrain extends SubsystemBase {
   }
   
   private double applySpeed(double value){
-    return this.currentSpeed*value;
+    return this.slewRateLimiter.calculate(this.currentSpeed*value);
   }
 
   /**
@@ -89,8 +93,7 @@ public class DriveTrain extends SubsystemBase {
 public void adjustSpeed(double adjustSpeedAmount) {
   double nextSpeed = this.currentSpeed;
   nextSpeed = nextSpeed+adjustSpeedAmount;
-  nextSpeed = Math.min(nextSpeed,Constants.Motor.maximumDriveSpeed);
-  nextSpeed = Math.max(nextSpeed,Constants.Motor.minimumDriveSpeed);
+  nextSpeed = MathUtil.clamp(nextSpeed, Constants.Motor.minimumDriveSpeed, Constants.Motor.maximumDriveSpeed);
   this.currentSpeed = nextSpeed;
 }
 }
