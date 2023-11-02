@@ -31,21 +31,26 @@ public class DriveTrain extends SubsystemBase {
   private DifferentialDrive driveTrain = new DifferentialDrive(left, right); 
 
   public boolean driveInvert = true; 
+  private double currentSpeed;
 
   /** Creates a new ExampleSubsystem. */
   public DriveTrain() {
     this.backLeftMotor.setInverted(true);
     this.frontLeftMotor.setInverted(true);
+    this.currentSpeed = Constants.Motor.maximumDriveSpeed;
   }
 
   public void drive(double left, double right){
-    driveTrain.tankDrive(left, right);
+    driveTrain.tankDrive(applySpeed(left), applySpeed(right));
   }
 
   public void driveInvert(double left, double right){
     driveTrain.tankDrive(left * -1, right * -1);
   }
   
+  private double applySpeed(double value){
+    return this.currentSpeed*value;
+  }
 
   /**
    * Example command factory method.
@@ -80,4 +85,12 @@ public class DriveTrain extends SubsystemBase {
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
   }
+
+public void adjustSpeed(double adjustSpeedAmount) {
+  double nextSpeed = this.currentSpeed;
+  nextSpeed = nextSpeed+adjustSpeedAmount;
+  nextSpeed = Math.min(nextSpeed,Constants.Motor.maximumDriveSpeed);
+  nextSpeed = Math.max(nextSpeed,Constants.Motor.minimumDriveSpeed);
+  this.currentSpeed = nextSpeed;
+}
 }
