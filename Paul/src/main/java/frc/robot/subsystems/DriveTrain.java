@@ -5,9 +5,11 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -30,7 +32,7 @@ public class DriveTrain extends SubsystemBase {
 
   private DifferentialDrive driveTrain = new DifferentialDrive(left, right); 
 
-  public boolean driveInvert = true; 
+  public boolean driveInvert = false; 
 
   /** Creates a new ExampleSubsystem. */
   public DriveTrain() {
@@ -38,13 +40,26 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void drive(double left, double right){
-    driveTrain.tankDrive(left, right);
+    if (driveInvert == false){
+    driveTrain.tankDrive(left, right);} else
+    {
+      
+    }
   }
 
   public void driveInvert(double left, double right){
-    driveTrain.tankDrive(left * -1, right * -1);
+    if (driveInvert == true){
+    driveTrain.tankDrive(left * -1, right * -1);}
+
   }
-  
+
+  private <E> void checkError(String message, E... errors){
+    for (E error : errors){
+      if (error != REVLibError.kOk && error != ErrorCode.OK){
+        DriverStation.reportError(message + "on [" + debugName + "] module: " + error, toString(), false);
+      }
+    }
+  }
 
   /**
    * Example command factory method.

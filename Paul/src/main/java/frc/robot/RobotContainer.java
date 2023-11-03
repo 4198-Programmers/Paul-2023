@@ -28,6 +28,7 @@ public class RobotContainer {
 
   // The robot's subsystems and commands are defined here...
   private final DriveTrain drive = new DriveTrain();
+  private final DriveTrain driveInvert = new DriveTrain();
   private final IntakeSubsystem intake = new IntakeSubsystem();
   private final DriveCommand joystickDriveCommand = new DriveCommand(drive, ()->{return m_driverController.getLeftY();}, ()->{return m_driverController.getRightY();});
   
@@ -35,11 +36,9 @@ public class RobotContainer {
  
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    drive.setDefaultCommand(joystickDriveCommand);
+    drive.setDefaultCommand(driveInvert);
     // Configure the trigger bindings
     configureBindings();
-    m_driverController.button(kA).onTrue();
-//fix
   }
 
   /**
@@ -52,6 +51,8 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
+    m_driverController.a().onTrue(joystickDriveCommand );
+
     m_driverController.leftBumper().whileTrue(new EjectCommand(this.intake));
     m_driverController.rightBumper().whileTrue(new LoadCommand(this.intake));
   }
