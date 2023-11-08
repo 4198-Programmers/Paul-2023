@@ -27,7 +27,7 @@ public final class Constants {
     public static final double driveSpeedStep = 0.1f;
     public static final double slewRateLimit = 0.1f;
 
-    public static final int intakeFrontMotor = 2;
-    public static final int intakeBackMotor = 3;
+    public static final int intakeTopMotor = 2;
+    public static final int intakeBottomMotor = 3;
   }
 }
