@@ -11,14 +11,16 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class LoadCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final IntakeSubsystem intakeSubsystem;
+  private final boolean invertedIntake;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public LoadCommand(IntakeSubsystem subsystem) {
-    intakeSubsystem = subsystem;
+  public LoadCommand(IntakeSubsystem subsystem, boolean invertedIntake) {
+    this.intakeSubsystem = subsystem;
+    this.invertedIntake = invertedIntake
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -30,7 +32,11 @@ public class LoadCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    this.intakeSubsystem.in();
+    if(this.invertedIntake){
+      this.intakeSubsystem.intakeRight();
+    }else{
+      this.intakeSubsystem.intakeLeft();
+    }
   }
 
   // Called once the command ends or is interrupted.
