@@ -2,10 +2,10 @@ package frc.robot.commands;
 
 import frc.robot.subsystems.IntakeSubsystem;
 
-public class TopRightIntakeCommand extends CommandBase {
+public class TopIntakeCommand extends CommandBase {
     //left orintated 
 
-public void TopRightIntake(IntakeSubsystem topRight, ) {
+public void TopIntake(IntakeSubsystem topRight) {
     topRight = topRight;
     addRequirements(topRight);
 
