@@ -51,8 +51,10 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    m_driverController.leftBumper().whileTrue(new EjectCommand(this.intake));
-    m_driverController.rightBumper().whileTrue(new LoadCommand(this.intake));
+    m_driverController.leftBumper().whileTrue(new LoadCommand(this.intake, true));
+    m_driverController.rightBumper().whileTrue(new LoadCommand(this.intake, false));
+    m_driverController.leftTrigger().whileTrue(new EjectCommand(this.intake, true));
+    m_driverController.rightTrigger().whileTrue(new EjectCommand(this.intake, false));
   }
 //robot understands that it is turning on, controler is working
   /**

@@ -14,29 +14,44 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class IntakeSubsystem extends SubsystemBase {
-  private CANSparkMax intakeTopMotor = new CANSparkMax(Constants.Motor.intakeTopMotor, MotorType.kBrushless);
-  private CANSparkMax intakeBottomMotor = new CANSparkMax(Constants.Motor.intakeBottomMotor, MotorType.kBrushless);
+  private CANSparkMax intakeBottomWheels = new CANSparkMax(Constants.Motor.intakeBottomWheels, MotorType.kBrushless);
+  private CANSparkMax intakeTopWheels = new CANSparkMax(Constants.Motor.intakeTopWheels, MotorType.kBrushless);
 
-  // private RelativeEncoder frontRightEncoder = frontRightMotor.getEncoder();
-  // private RelativeEncoder backLeftEncoder = backLeftMotor.getEncoder();
+  private RelativeEncoder bottomWheelEncoder = intakeBottomWheels.getEncoder();
+  private RelativeEncoder topWheelEncoder = intakeTopWheels.getEncoder();
 
   private double speed = 1.0;
 
   // ** Creates a new ExampleSubsystem. */
   public IntakeSubsystem() {
     //this.intakeBottomMotor.follow(this.intakeTopMotor);
-    this.intakeBottomMotor.setInverted(true);
+    //this.intakeTopWheels.setInverted(true);
+    this.bottomWheelEncoder.setPosition(0);
+    this.topWheelEncoder.setPosition(0);
   }
 
-  public void in() {
-    this.intakeTopMotor.set(speed);
-    this.intakeBottomMotor.set(speed);
+  public void inLeft() {
+    this.intakeBottomWheels.set(-speed);
+    this.intakeTopWheels.set(speed);
   }
 
-  public void eject() {
-    this.intakeBottomMotor.set(-speed);
-    if(this.intakeBottomMotor.get())
-    this.intakeTopMotor.set(-speed);
+  public void inRight() {
+    this.intakeBottomWheels.set(speed);
+    this.intakeTopWheels.set(-speed);
+  }
+
+  public void leftEject() {
+    this.intakeBottomWheels.set(speed);
+    if((Math.abs(this.bottomWheelEncoder.getVelocity()/Constants.Motor.maxMotorVelocity)) >= 0.9) {
+      this.intakeTopWheels.set(-speed);
+    }
+  }
+
+  public void rightEject() {
+    this.intakeBottomWheels.set(-speed);
+    if((Math.abs(this.bottomWheelEncoder.getVelocity()/Constants.Motor.maxMotorVelocity)) >= 0.9) {
+      this.intakeTopWheels.set(speed);
+    }
   }
 
   @Override
@@ -50,17 +65,17 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void stop() {
-    this.intakeTopMotor.set(0);
-    this.intakeBottomMotor.set(0);
+    this.intakeBottomWheels.set(0);
+    this.intakeTopWheels.set(0);
   }
 
 public void intakeRight() {
-  this.intakeBottomMotor.set(speed);
-  this.intakeTopMotor.set(speed);
+  this.intakeTopWheels.set(speed);
+  this.intakeBottomWheels.set(speed);
 }
 
 public void intakeLeft() {
-this.intakeBottomMotor.set(-speed);
-this.intakeTopMotor.set(-speed);
+this.intakeTopWheels.set(-speed);
+this.intakeBottomWheels.set(-speed);
 }
 }

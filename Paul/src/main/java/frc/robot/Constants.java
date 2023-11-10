@@ -22,7 +22,9 @@ public final class Constants {
     public static final int frontLeftMotor = 6; 
     public static final int backRightMotor = 4;
 
-    public static final int intakeTopMotor = 2;
-    public static final int intakeBottomMotor = 3;
+    public static final int intakeBottomWheels = 2;
+    public static final int intakeTopWheels = 3;
+
+    public static final double maxMotorVelocity = 0;
   }
 }

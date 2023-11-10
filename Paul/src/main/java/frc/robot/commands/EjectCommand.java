@@ -11,16 +11,16 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class EjectCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final IntakeSubsystem intakeSubsystem;
-  private final boolean invertedIntake;
+  private final boolean left;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public EjectCommand(IntakeSubsystem subsystem, boolean invertedIntake) {
+  public EjectCommand(IntakeSubsystem subsystem, boolean left) {
     this.intakeSubsystem = subsystem;
-    this.invertedIntake = invertedIntake;
+    this.left = left;
   
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -32,10 +32,12 @@ public class EjectCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(this.invertedIntake){
-      this.intakeSubsystem.
+    if(left) {
+      this.intakeSubsystem.leftEject();
     }
-      this.intakeSubsystem.eject();
+    else{
+      this.intakeSubsystem.rightEject();
+    }
     } 
 
   // Called once the command ends or is interrupted.
