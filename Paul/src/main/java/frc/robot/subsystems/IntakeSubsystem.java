@@ -20,27 +20,24 @@ public class IntakeSubsystem extends SubsystemBase {
   // private RelativeEncoder frontRightEncoder = frontRightMotor.getEncoder();
   // private RelativeEncoder backLeftEncoder = backLeftMotor.getEncoder();
 
-  private double speed = 1.0;
-
   // ** Creates a new ExampleSubsystem. */
   public IntakeSubsystem() {
-    this.intakeBottomMotor.follow(this.intakeTopMotor);
   }
 //RB 
-  public void topRight() {
-    this.intakeTopMotor.set(speed);
+  public void topIntake() {
+    this.intakeTopMotor.set(Constants.Motor.maximumTopIntakeSpeed);
   }
 //LB
-public void topLeft() {
-  this.intakeTopMotor.set(speed);
+public void topOuttake() {
+  this.intakeTopMotor.set(Constants.Motor.maximumTopIntakeSpeed);
 }
 //RT
-  public void bottomRight() {
-    this.intakeBottomMotor.set(speed);
+  public void bottomIntake() {
+    this.intakeBottomMotor.set(Constants.Motor.maximumBottomIntakeSpeed);
   }
 //LT
-public void bottomLeft() {
-  this.intakeBottomMotor.set(speed);
+public void bottomOuttake() {
+  this.intakeBottomMotor.set(Constants.Motor.maximumBottomIntakeSpeed);
 }
 
   @Override
