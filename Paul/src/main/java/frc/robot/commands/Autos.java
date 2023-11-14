@@ -14,32 +14,11 @@ public class Autos extends CommandBase {
     return Commands.sequence(subsystem.exampleMethodCommand());
   }
 
-  private DriveTrain drive; 
-  public Auto drive(DriveTrain drive){
-    this.drive = drive; 
+  public static Autos middlePosition(DriveTrain subsystem){
+    //forward into open area 
+    //backward onto charging station
+
   }
-
-  private boolean timerBoolean(double startTime, double duration){
-    double delayTime = startTime + duration; 
-
-    if(System.currentTimeMillis() <= delayTime)
-    {
-      return true; 
-    } else {
-      return false; 
-    }
-  }
-
-  public void AutonomousForward(int time, double speed){
-
-    double start = System.currentTimeMillis();
-
-    while (timerBoolean(start, time)){
-      DriveTrain.drive(speed, speed);
-     }
-     isFinished();
-  }
-
 
 
   private Autos() {

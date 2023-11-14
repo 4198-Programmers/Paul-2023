@@ -30,4 +30,6 @@ public final class Constants {
     public static final int intakeFrontMotor = 2;
     public static final int intakeBackMotor = 3;
   }
+//change
+  public static final double diameterOfWheel = 3;
 }

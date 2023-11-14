@@ -34,7 +34,7 @@ public class DriveTrain extends SubsystemBase {
   public boolean driveInvert = true; 
   private double currentSpeed;
   private SlewRateLimiter slewRateLimiter; 
-
+ 
   /** Creates a new ExampleSubsystem. */
   public DriveTrain() {
     this.backLeftMotor.setInverted(true);
@@ -44,7 +44,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
 
-  public static void drive(double left, double right){
+  public void drive(double left, double right){
     driveTrain.tankDrive(applySpeed(left), applySpeed(right));
   }
 
@@ -55,7 +55,26 @@ public class DriveTrain extends SubsystemBase {
   private double applySpeed(double value){
     return this.slewRateLimiter.calculate(this.currentSpeed*value);
   }
+  
+  public void resetPosition(){
+    frontLeftEncoder = 0d;
+    frontRightEncoder = 0d; 
+    backLeftEncoder = 0d; 
+    backRightEncoder = 0d;
+  }
 
+  public double currentDistancePosition(){
+    double currentDistance() = (3.14159265d)(RelativeEncoder.frontLeftEncoder())(Constants.diameterOfWheel); 
+    return Math.round(currentDistance());
+  }
+
+  public void driveStraight(double speed, double distance){
+    double resetPosition;
+    while (distance >= currentDistancePosition()){
+      drive(speed, speed);
+    }
+  }
+  
   /**
    * Example command factory method.
    *
