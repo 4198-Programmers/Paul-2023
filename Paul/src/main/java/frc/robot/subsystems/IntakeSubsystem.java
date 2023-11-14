@@ -25,7 +25,7 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 //RB 
   public void topIntake() {
-    this.intakeTopMotor.set(Constants.Motor.maximumTopIntakeSpeed);
+    this.intakeTopMotor.set(-1 * Constants.Motor.maximumTopIntakeSpeed);
   }
 //LB
 public void topOuttake() {
@@ -33,7 +33,7 @@ public void topOuttake() {
 }
 //RT
   public void bottomIntake() {
-    this.intakeBottomMotor.set(Constants.Motor.maximumBottomIntakeSpeed);
+    this.intakeBottomMotor.set(-1 * Constants.Motor.maximumBottomIntakeSpeed);
   }
 //LT
 public void bottomOuttake() {
