@@ -37,6 +37,7 @@ public class LoadCommand extends CommandBase {
     }else{
       this.intakeSubsystem.intakeRight();
     }
+    System.out.println(this.intakeSubsystem.moterMaxVelocity());
   }
 
   // Called once the command ends or is interrupted.
