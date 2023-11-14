@@ -1,3 +1,8 @@
+package frc.robot.commands;
+
+import frc.robot.subsystems.IntakeSubsystem;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+
 public class BottomOutputCommand extends CommandBase {
     //left orintated 
     private final IntakeSubsystem intakeSubsystem;
@@ -12,7 +17,7 @@ public class BottomOutputCommand extends CommandBase {
      // Called every time the scheduler runs while the command is scheduled.
      @Override
      public void execute() {
-       this.intakeSubsystem.bottomOutput();
+       this.intakeSubsystem.bottomOuttake();
      }
      
      // Called once the command ends or is interrupted.
