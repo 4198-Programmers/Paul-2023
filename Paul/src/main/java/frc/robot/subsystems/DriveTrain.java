@@ -44,7 +44,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
 
-  public void drive(double left, double right){
+  public static void drive(double left, double right){
     driveTrain.tankDrive(applySpeed(left), applySpeed(right));
   }
 

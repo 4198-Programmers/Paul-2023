@@ -30,12 +30,14 @@ public class Autos extends CommandBase {
     }
   }
 
-
   public void AutonomousForward(int time, double speed){
-    double delayTime = startTime + Dr
 
-     if(System.currentTimeMillis() <= delayTime)
+    double start = System.currentTimeMillis();
 
+    while (timerBoolean(start, time)){
+      DriveTrain.drive(speed, speed);
+     }
+     isFinished();
   }
 
 
