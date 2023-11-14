@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class IntakeSubsystem extends SubsystemBase {
-  private CANSparkMax intakeBottomWheels = new CANSparkMax(Constants.Motor.intakeBottomWheels, MotorType.kBrushless);
+  private CANSparkMax intakeBottomWheels = new CANSparkMax(Constants.Motor.intakeBottomWheels, MotorType.kBrushed);
   private CANSparkMax intakeTopWheels = new CANSparkMax(Constants.Motor.intakeTopWheels, MotorType.kBrushless);
 
   private RelativeEncoder bottomWheelEncoder = intakeBottomWheels.getEncoder();
