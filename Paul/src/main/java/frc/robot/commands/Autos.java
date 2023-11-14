@@ -16,8 +16,18 @@ public class Autos extends CommandBase {
 
   public static Autos middlePosition(DriveTrain subsystem){
     //forward into open area 
+    
+    return Commands.sequence(driveStraight(1, 4), driveStraight(-1, 4));
+
     //backward onto charging station
 
+  }
+  
+  public static Autos driveStraight(double speed, double distance){
+    while (distance >= currentDistancePosition()){
+      drive(speed, speed);
+    } 
+    double resetPosition;
   }
 
 

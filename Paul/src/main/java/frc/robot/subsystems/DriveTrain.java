@@ -64,15 +64,15 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public double currentDistancePosition(){
-    double currentDistance() = (3.14159265d)(RelativeEncoder.frontLeftEncoder())(Constants.diameterOfWheel); 
-    return Math.round(currentDistance());
+    currentDistancePosition() = (3.14159265d)(RelativeEncoder.frontLeftEncoder())(Constants.diameterOfWheel); 
+    return Math.round(currentDistancePosition());
   }
 
   public void driveStraight(double speed, double distance){
-    double resetPosition;
     while (distance >= currentDistancePosition()){
       drive(speed, speed);
-    }
+    } 
+    double resetPosition;
   }
   
   /**
