@@ -45,6 +45,7 @@ public class DriveTrain extends SubsystemBase {
 
 
   public void drive(double left, double right){
+    System.out.println("NOOOOOOOOOOOOOOO"+left+"hmm"+right);
     driveTrain.tankDrive(applySpeed(left), applySpeed(right));
   }
 
