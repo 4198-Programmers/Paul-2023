@@ -42,6 +42,7 @@ public class DriveTrain extends SubsystemBase {
     this.frontLeftMotor.setInverted(true);
     this.currentSpeed = Constants.Motor.maximumDriveSpeed;
     this.slewRateLimiterLeft = new SlewRateLimiter(Constants.Motor.slewRateLimit, -Constants.Motor.slewRateLimit, 0);
+    this.slewRateLimiterRight = new SlewRateLimiter(Constants.Motor.slewRateLimit, -Constants.Motor.slewRateLimit, 0);
   }
 
 
