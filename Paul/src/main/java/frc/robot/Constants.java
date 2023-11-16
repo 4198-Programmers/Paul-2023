@@ -31,8 +31,8 @@ public final class Constants {
     public static final int intakeBottomMotor = 3;
 
     //original 1 and 8 
-  public static final double maximumTopIntakeSpeed = 0.5f;
-  public static final double maximumBottomIntakeSpeed = 0.4f;
+  public static final double maximumTopIntakeSpeed = 1.0f;
+  public static final double maximumBottomIntakeSpeed = 0.3f;
 
   }
 }
