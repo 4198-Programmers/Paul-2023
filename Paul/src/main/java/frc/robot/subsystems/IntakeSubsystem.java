@@ -14,30 +14,31 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class IntakeSubsystem extends SubsystemBase {
-  private CANSparkMax intakeTopMotor = new CANSparkMax(Constants.Motor.intakeTopMotor, MotorType.kBrushed);
-  private CANSparkMax intakeBottomMotor = new CANSparkMax(Constants.Motor.intakeBottomMotor, MotorType.kBrushless);
+  private CANSparkMax intakeTopMotor = new CANSparkMax(Constants.Motor.intakeBottomMotor, MotorType.kBrushless);
+  private CANSparkMax intakeBottomMotor = new CANSparkMax(Constants.Motor.intakeTopMotor, MotorType.kBrushed);
 
   // private RelativeEncoder frontRightEncoder = frontRightMotor.getEncoder();
   // private RelativeEncoder backLeftEncoder = backLeftMotor.getEncoder();
 
   // ** Creates a new ExampleSubsystem. */
   public IntakeSubsystem() {
+    this.intakeBottomMotor.setInverted(true);
   }
 //RB 
   public void topIntake() {
-    this.intakeTopMotor.set(-1 * Constants.Motor.maximumTopIntakeSpeed);
+    this.intakeTopMotor.set(Constants.Motor.maximumTopIntakeSpeed);
   }
 //LB
 public void topOuttake() {
-  this.intakeTopMotor.set(Constants.Motor.maximumTopIntakeSpeed);
+  this.intakeTopMotor.set(-Constants.Motor.maximumTopIntakeSpeed);
 }
 //RT
   public void bottomIntake() {
-    this.intakeBottomMotor.set(-1 * Constants.Motor.maximumBottomIntakeSpeed);
+    this.intakeBottomMotor.set(Constants.Motor.maximumBottomIntakeSpeed);
   }
 //LT
 public void bottomOuttake() {
-  this.intakeBottomMotor.set(Constants.Motor.maximumBottomIntakeSpeed);
+  this.intakeBottomMotor.set(-Constants.Motor.maximumBottomIntakeSpeed);
 }
 
   @Override
@@ -52,5 +53,6 @@ public void bottomOuttake() {
 
   public void stop() {
     this.intakeTopMotor.set(0);
+    this.intakeBottomMotor.set(0);
   }
 }

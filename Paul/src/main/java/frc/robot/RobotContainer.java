@@ -69,11 +69,11 @@ public class RobotContainer {
     m_driverController.povUp().onTrue(new AdjustSpeedCommand(this.drive, Constants.Motor.driveSpeedStep));
     m_driverController.povDown().onTrue(new AdjustSpeedCommand(this.drive, -Constants.Motor.driveSpeedStep));
 
-    m_driverController.leftBumper().and(m_driverController.leftTrigger().negate()).whileTrue(bottomOutputCommand); 
-    m_driverController.rightBumper().and(m_driverController.rightTrigger().negate()).whileTrue(bottomIntakeCommand);
+    m_driverController.leftBumper().and(m_driverController.leftTrigger().negate()).whileTrue(topOutputCommand); 
+    m_driverController.rightBumper().and(m_driverController.rightTrigger().negate()).whileTrue(topIntakeCommand);
     
-    m_driverController.leftTrigger().and(m_driverController.leftBumper().negate()).whileTrue(topOutputCommand);
-    m_driverController.rightTrigger().and(m_driverController.rightBumper().negate()).whileTrue(topIntakeCommand);
+    m_driverController.leftTrigger().and(m_driverController.leftBumper().negate()).whileTrue(bottomOutputCommand);
+    m_driverController.rightTrigger().and(m_driverController.rightBumper().negate()).whileTrue(bottomIntakeCommand);
 
     m_driverController.leftBumper().and(m_driverController.leftTrigger()).whileTrue(topBottomOutputCommand);
     m_driverController.rightTrigger().and(m_driverController.rightBumper()).whileTrue(topBottomIntakeCommand);
