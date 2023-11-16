@@ -14,26 +14,32 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class IntakeSubsystem extends SubsystemBase {
-  private CANSparkMax intakeFrontMotor = new CANSparkMax(Constants.Motor.intakeFrontMotor, MotorType.kBrushless);
-  private CANSparkMax intakeBackMotor = new CANSparkMax(Constants.Motor.intakeBackMotor, MotorType.kBrushless);
+  private CANSparkMax intakeTopMotor = new CANSparkMax(Constants.Motor.intakeBottomMotor, MotorType.kBrushless);
+  private CANSparkMax intakeBottomMotor = new CANSparkMax(Constants.Motor.intakeTopMotor, MotorType.kBrushed);
 
   // private RelativeEncoder frontRightEncoder = frontRightMotor.getEncoder();
   // private RelativeEncoder backLeftEncoder = backLeftMotor.getEncoder();
 
-  private double speed = 1.0;
-
   // ** Creates a new ExampleSubsystem. */
   public IntakeSubsystem() {
-    this.intakeBackMotor.follow(this.intakeFrontMotor);
+    this.intakeBottomMotor.setInverted(true);
   }
-
-  public void in() {
-    this.intakeFrontMotor.set(speed);
+//RB 
+  public void topIntake() {
+    this.intakeTopMotor.set(Constants.Motor.maximumTopIntakeSpeed);
   }
-
-  public void eject() {
-    this.intakeFrontMotor.set(-speed);
+//LB
+public void topOuttake() {
+  this.intakeTopMotor.set(-Constants.Motor.maximumTopIntakeSpeed);
+}
+//RT
+  public void bottomIntake() {
+    this.intakeBottomMotor.set(Constants.Motor.maximumBottomIntakeSpeed);
   }
+//LT
+public void bottomOuttake() {
+  this.intakeBottomMotor.set(-Constants.Motor.maximumBottomIntakeSpeed);
+}
 
   @Override
   public void periodic() {
@@ -46,6 +52,7 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void stop() {
-    this.intakeFrontMotor.set(0);
+    this.intakeTopMotor.set(0);
+    this.intakeBottomMotor.set(0);
   }
 }
