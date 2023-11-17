@@ -47,7 +47,7 @@ public class DriveTrain extends SubsystemBase {
 
 
   public void drive(double left, double right){
-    driveTrain.tankDrive(applySpeed(left, this.slewRateLimiterLeft), applySpeed(right, this.slewRateLimiterRight));
+    driveTrain.arcadeDrive(applySpeed(left, this.slewRateLimiterLeft), applySpeed(right, this.slewRateLimiterRight));
   }
 
   public void driveInvert(double left, double right){

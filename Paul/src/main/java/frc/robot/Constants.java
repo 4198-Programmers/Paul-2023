@@ -25,14 +25,16 @@ public final class Constants {
     public static final double maximumDriveSpeed = 1.0f;
     public static final double minimumDriveSpeed = 0.2f;
     public static final double driveSpeedStep = 0.1f;
-    public static final double slewRateLimit = 2.0f;
+    public static final double slewRateLimit = 0.75
+    f;
+
 
     public static final int intakeTopMotor = 2;
     public static final int intakeBottomMotor = 3;
 
     //original 1 and 8 
   public static final double maximumTopIntakeSpeed = 1.0f;
-  public static final double maximumBottomIntakeSpeed = 0.3f;
+  public static final double maximumBottomIntakeSpeed = 1.0f;
 
   }
 }

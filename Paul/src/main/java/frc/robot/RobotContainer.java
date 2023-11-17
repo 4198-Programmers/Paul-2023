@@ -36,7 +36,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveTrain drive = new DriveTrain();
   private final IntakeSubsystem intake = new IntakeSubsystem();
-  private final DriveCommand joystickDriveCommand = new DriveCommand(drive, ()->{return m_driverController.getLeftY();}, ()->{return m_driverController.getRightY();});
+  private final DriveCommand joystickDriveCommand = new DriveCommand(drive, ()->{return m_driverController.getLeftY();}, ()->{return m_driverController.getRightX();});
   
   private final TopIntakeCommand topIntakeCommand = new TopIntakeCommand(intake);
   private final BottomIntakeCommand bottomIntakeCommand = new BottomIntakeCommand(intake);
