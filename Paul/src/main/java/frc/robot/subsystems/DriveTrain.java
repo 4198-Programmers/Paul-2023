@@ -43,7 +43,6 @@ public class DriveTrain extends SubsystemBase {
     this.slewRateLimiter = new SlewRateLimiter(Constants.Motor.slewRateLimit, -Constants.Motor.slewRateLimit, 0);
   }
 
-
   public void drive(double left, double right){
     driveTrain.tankDrive(applySpeed(left), applySpeed(right));
   }
@@ -57,23 +56,12 @@ public class DriveTrain extends SubsystemBase {
   }
   
   public void resetPosition(){
-    frontLeftEncoder = 0d;
-    frontRightEncoder = 0d; 
-    backLeftEncoder = 0d; 
-    backRightEncoder = 0d;
+    frontLeftEncoder.setPosition(0);
+    frontRightEncoder.setPosition(0); 
+    backLeftEncoder.setPosition(0); 
+    backRightEncoder.setPosition(0);
   }
 
-  public double currentDistancePosition(){
-    currentDistancePosition() = (3.14159265d)(RelativeEncoder.frontLeftEncoder())(Constants.diameterOfWheel); 
-    return Math.round(currentDistancePosition());
-  }
-
-  public void driveStraight(double speed, double distance){
-    while (distance >= currentDistancePosition()){
-      drive(speed, speed);
-    } 
-    double resetPosition;
-  }
   
   /**
    * Example command factory method.

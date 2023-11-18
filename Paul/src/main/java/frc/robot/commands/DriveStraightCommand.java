@@ -11,7 +11,6 @@ public class DriveStraightCommand extends CommandBase{
 
   }
   private DriveTrain driveTrain;
-  private 
 
   public double currentDistancePosition(){
     double currentDistancePosition = (Math.PI)(RelativeEncoder.frontLeftEncoder())(Constants.diameterOfWheel); 
@@ -19,11 +18,13 @@ public class DriveStraightCommand extends CommandBase{
   }
   
   @Override
-  public void initialize() {}
+  public void initialize() {
+    driveTrain.resetPosition();
+  }
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      this.intakeSubsystem.eject();
+      this.driveTrain.drive(speed, speed);
     } 
 
   // Called once the command ends or is interrupted.
@@ -36,7 +37,9 @@ public class DriveStraightCommand extends CommandBase{
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if (distance <= driveTrain.currentDistancePosition());{
+    return true;}
+
   }
 
 }
