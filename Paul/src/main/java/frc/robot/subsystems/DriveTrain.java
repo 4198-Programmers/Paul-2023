@@ -39,6 +39,10 @@ public class DriveTrain extends SubsystemBase {
   public DriveTrain() {
     this.backLeftMotor.setInverted(true);
     this.frontLeftMotor.setInverted(true);
+    this.backLeftEncoder.setPositionConversionFactor(Constants.ConvertionFactorDrive);
+    this.backRightEncoder.setPositionConversionFactor(Constants.ConvertionFactorDrive);
+    this.frontLeftEncoder.setPositionConversionFactor(Constants.ConvertionFactorDrive);
+    this.frontRightEncoder.setPositionConversionFactor(Constants.ConvertionFactorDrive);
     this.currentSpeed = Constants.Motor.maximumDriveSpeed;
     this.slewRateLimiter = new SlewRateLimiter(Constants.Motor.slewRateLimit, -Constants.Motor.slewRateLimit, 0);
   }
@@ -47,12 +51,19 @@ public class DriveTrain extends SubsystemBase {
     driveTrain.tankDrive(applySpeed(left), applySpeed(right));
   }
 
+  public void driveAuto(double left, double right){
+    frontLeftMotor.set(left);
+    frontRightMotor.set(right);
+    backLeftMotor.set(left);
+    backRightMotor.set(right);
+  }
   public double drivePosition(){
     return((frontRightEncoder.getPosition() + backRightEncoder.getPosition())/2d);
   }
 
   public double currentDistancePosition(){
     double currentDistancePosition = (Math.PI)*(frontRightEncoder.getPosition())*(Constants.diameterOfWheel)*(Constants.ConvertionFactorDrive); 
+    double currentDistancePosition = (Math.PI)*(frontRightEncoder.getPosition())*(Constants.diameterOfWheel)*; 
     return Math.round(currentDistancePosition);
   }
 

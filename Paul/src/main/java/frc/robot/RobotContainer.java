@@ -11,8 +11,10 @@ import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.commands.AdjustSpeedCommand;
 import frc.robot.commands.Autos;
 import frc.robot.commands.DriveCommand;
+import frc.robot.commands.DriveStraightCommand;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -56,6 +58,10 @@ public class RobotContainer {
     m_driverController.leftBumper().whileTrue(new EjectCommand(this.intake));
     m_driverController.rightBumper().whileTrue(new LoadCommand(this.intake));
 
+    m_driverController.b().onTrue(new SequentialCommandGroup(new DriveStraightCommand(drive, 100, 0.25, 0.25).andThen( (new DriveStraightCommand(drive, -100, -0.25, -0.25)))));
+    m_driverController.y().onTrue(new DriveStraightCommand(drive, 100, 0.25, 0.25));
+    m_driverController.x().onTrue(new DriveStraightCommand(drive, -100, -0.25, -0.25));
+
     m_driverController.povUp().onTrue(new AdjustSpeedCommand(this.drive, Constants.Motor.driveSpeedStep));
     m_driverController.povDown().onTrue(new AdjustSpeedCommand(this.drive, -Constants.Motor.driveSpeedStep));
   }
@@ -67,7 +73,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    
+   // return new SequentialCommandGroup(new DriveStraightCommand(drive, 15, 0.5, 0.5).andThen(new DriveStraightCommand(drive, -15, -0.5, -0.5)));
     return Autos.DriveOutAuto(drive);
   }
 }

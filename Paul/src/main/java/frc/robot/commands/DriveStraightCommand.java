@@ -26,21 +26,21 @@ public class DriveStraightCommand extends CommandBase{
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveTrain.drive(rightSpeed, leftSpeed);
+    //driveTrain.driveAuto(rightSpeed, leftSpeed);
+    driveTrain.drive(leftSpeed, rightSpeed);
+    System.out.println("Drive POsition: " + driveTrain.currentDistancePosition());
     } 
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    this.driveTrain.drive(0,0);
-    
+    this.driveTrain.driveAuto(0,0);
+    driveTrain.resetPosition();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (distanceInches <= driveTrain.currentDistancePosition());
-    return true;
-
+  return (Math.abs(distanceInches) <= Math.abs(driveTrain.currentDistancePosition()));
   }
 }
