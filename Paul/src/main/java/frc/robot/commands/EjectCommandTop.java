@@ -4,40 +4,45 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.IntakeSubsystemTop;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class AdjustSpeedCommand extends CommandBase {
+public class EjectCommandTop extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final DriveTrain driveTrain;
-private final double adjustSpeedAmount;
+  private final IntakeSubsystemTop intakeSubsystem;
+
   /**
    * Creates a new ExampleCommand.
    *
-   * @param driveTrain The subsystem used by this command.
+   * @param subsystem The subsystem used by this command.
    */
-  public AdjustSpeedCommand(DriveTrain driveTrain, double adjustSpeedAmount) {
-    this.driveTrain = driveTrain;
-    this.adjustSpeedAmount = adjustSpeedAmount;
+  public EjectCommandTop(IntakeSubsystemTop subsystem) {
+    intakeSubsystem = subsystem;
+  
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(driveTrain);
+    addRequirements(subsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {}
-
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    this.driveTrain.adjustSpeed(this.adjustSpeedAmount);
+      this.intakeSubsystem.eject();
+    } 
+
+  // Called once the command ends or is interrupted.
+  @Override
+  public void end(boolean interrupted) {
+    this.intakeSubsystem.stop();
+    
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }
