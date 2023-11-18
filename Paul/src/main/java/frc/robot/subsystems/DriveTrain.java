@@ -47,6 +47,15 @@ public class DriveTrain extends SubsystemBase {
     driveTrain.tankDrive(applySpeed(left), applySpeed(right));
   }
 
+  public double drivePosition(){
+    return((frontRightEncoder.getPosition() + backRightEncoder.getPosition())/2d);
+  }
+
+  public double currentDistancePosition(){
+    double currentDistancePosition = (Math.PI)*(frontRightEncoder.getPosition())*(Constants.diameterOfWheel)*(Constants.ConvertionFactorDrive); 
+    return Math.round(currentDistancePosition);
+  }
+
   public void driveInvert(double left, double right){
     driveTrain.tankDrive(left * -1, right * -1);
   }
