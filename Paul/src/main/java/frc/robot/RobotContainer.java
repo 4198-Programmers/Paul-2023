@@ -46,10 +46,10 @@ public class RobotContainer {
 
   // Command Groups
   Command loadCommandBoth = (new LoadCommandTop(intakeTop))
-  .andThen((new LoadCommandBottom(intakeBottom)));
+  .alongWith((new LoadCommandBottom(intakeBottom)));
 
   Command ejectCommandBoth = (new EjectCommandTop(intakeTop))
-  .andThen((new EjectCommandBottom(intakeBottom)));
+  .alongWith((new EjectCommandBottom(intakeBottom)));
   
 
 
