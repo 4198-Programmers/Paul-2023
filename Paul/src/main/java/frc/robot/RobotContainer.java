@@ -78,6 +78,7 @@ public class RobotContainer {
     m_driverController.leftBumper().and(m_driverController.leftTrigger()).whileTrue(topBottomOutputCommand);
     m_driverController.rightTrigger().and(m_driverController.rightBumper()).whileTrue(topBottomIntakeCommand);
 
+    m_driverController.a().onTrue(new EjectCommand(this.intake));
   }
 //robot understands that it is turning on, controler is working
   /**
