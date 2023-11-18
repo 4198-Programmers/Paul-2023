@@ -36,17 +36,26 @@ public class EjectCommand extends CommandBase {
   @Override
   public void initialize() {
     this.timeToStartTopMotor = Timer.getFPGATimestamp() + 2;
-    this.timeToFinish = this.timeToStartTopMotor + 1;
+    this.timeToFinish = this.timeToStartTopMotor + 2;
   }
   // Called every time the scheduler runs while the command is scheduled.
   
-  @Override
-  public void execute() {
+  // @Override
+  // public void execute() {
+  //   if(this.timeToStartTopMotor < Timer.getFPGATimestamp()){
+  //     this.intakeSubsystem.topBottomOuttake();
+  //   }else{
+  //     this.intakeSubsystem.bottomOuttake();
+  //   }
+  //   } 
+
+    @Override
+    public void execute() {
+      if(this.timeToStartTopMotor < Timer.getFPGATimestamp()){
+        this.intakeSubsystem.topOuttake();
+      }
       this.intakeSubsystem.bottomOuttake();
-    if(this.timeToStartTopMotor < Timer.getFPGATimestamp()){
-      this.intakeSubsystem.topOuttake();
-    }
-    } 
+      } 
 
   // Called once the command ends or is interrupted.
   @Override

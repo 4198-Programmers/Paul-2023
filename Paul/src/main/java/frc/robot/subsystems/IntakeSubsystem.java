@@ -26,21 +26,24 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 //RB 
   public void topIntake() {
-    this.intakeTopMotor.set(Constants.Motor.maximumTopIntakeSpeed);
+    this.intakeTopMotor.set(-Constants.Motor.maximumTopIntakeSpeed);
   }
 //LB
 public void topOuttake() {
-  this.intakeTopMotor.set(-Constants.Motor.maximumTopIntakeSpeed);
+  this.intakeTopMotor.set(Constants.Motor.maximumTopIntakeSpeed);
 }
 //RT
   public void bottomIntake() {
-    this.intakeBottomMotor.set(Constants.Motor.maximumBottomIntakeSpeed);
+    this.intakeBottomMotor.set(-Constants.Motor.maximumBottomIntakeSpeed);
   }
 //LT
 public void bottomOuttake() {
-  this.intakeBottomMotor.set(-Constants.Motor.maximumBottomIntakeSpeed);
+  this.intakeBottomMotor.set(Constants.Motor.maximumBottomIntakeSpeed);
 }
-
+  public void topBottomOuttake (){
+    bottomOuttake();
+    topOuttake();
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
