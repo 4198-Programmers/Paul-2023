@@ -6,10 +6,16 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.LoadCommand;
+import frc.robot.commands.TopBottomIntakeCommand;
+import frc.robot.commands.TopBottomOutputCommand;
+import frc.robot.commands.TopIntakeCommand;
+import frc.robot.commands.TopOutputCommand;
 import frc.robot.commands.EjectCommand;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.commands.AdjustSpeedCommand;
 import frc.robot.commands.Autos;
+import frc.robot.commands.BottomIntakeCommand;
+import frc.robot.commands.BottomOutputCommand;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.DriveStraightCommand;
 import frc.robot.subsystems.DriveTrain;
@@ -32,8 +38,15 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveTrain drive = new DriveTrain();
   private final IntakeSubsystem intake = new IntakeSubsystem();
-  private final DriveCommand joystickDriveCommand = new DriveCommand(drive, ()->{return m_driverController.getLeftY();}, ()->{return m_driverController.getRightY();});
+  private final DriveCommand joystickDriveCommand = new DriveCommand(drive, ()->{return m_driverController.getLeftY();}, ()->{return m_driverController.getRightX();});
   
+  private final TopIntakeCommand topIntakeCommand = new TopIntakeCommand(intake);
+  private final BottomIntakeCommand bottomIntakeCommand = new BottomIntakeCommand(intake);
+  private final TopOutputCommand topOutputCommand = new TopOutputCommand(intake);
+  private final BottomOutputCommand bottomOutputCommand = new BottomOutputCommand(intake);
+  private final TopBottomIntakeCommand topBottomIntakeCommand = new TopBottomIntakeCommand(intake);
+  private final TopBottomOutputCommand topBottomOutputCommand = new TopBottomOutputCommand(intake);
+
   // Replace with CommandPS4Controller or CommandJoystick if needed
  
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -55,8 +68,6 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    m_driverController.leftBumper().whileTrue(new EjectCommand(this.intake));
-    m_driverController.rightBumper().whileTrue(new LoadCommand(this.intake));
 
     m_driverController.b().onTrue(new SequentialCommandGroup(new DriveStraightCommand(drive, 100, 0.25, 0.25).andThen( (new DriveStraightCommand(drive, -100, -0.25, -0.25)))));
     m_driverController.y().onTrue(new DriveStraightCommand(drive, 100, 0.25, 0.25));
@@ -64,6 +75,16 @@ public class RobotContainer {
 
     m_driverController.povUp().onTrue(new AdjustSpeedCommand(this.drive, Constants.Motor.driveSpeedStep));
     m_driverController.povDown().onTrue(new AdjustSpeedCommand(this.drive, -Constants.Motor.driveSpeedStep));
+
+    m_driverController.leftBumper().and(m_driverController.leftTrigger().negate()).whileTrue(topOutputCommand); 
+    m_driverController.rightBumper().and(m_driverController.rightTrigger().negate()).whileTrue(topIntakeCommand);
+    
+    m_driverController.leftTrigger().and(m_driverController.leftBumper().negate()).whileTrue(bottomOutputCommand);
+    m_driverController.rightTrigger().and(m_driverController.rightBumper().negate()).whileTrue(bottomIntakeCommand);
+
+    m_driverController.leftBumper().and(m_driverController.leftTrigger()).whileTrue(topBottomOutputCommand);
+    m_driverController.rightTrigger().and(m_driverController.rightBumper()).whileTrue(topBottomIntakeCommand);
+
   }
 //robot understands that it is turning on, controler is working
   /**

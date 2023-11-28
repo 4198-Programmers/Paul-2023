@@ -33,8 +33,9 @@ public class DriveTrain extends SubsystemBase {
   private DifferentialDrive driveTrain = new DifferentialDrive(left, right); 
   public boolean driveInvert = true; 
   private double currentSpeed;
-  private SlewRateLimiter slewRateLimiter; 
- 
+  private SlewRateLimiter slewRateLimiterLeft;
+  private SlewRateLimiter slewRateLimiterRight;
+
   /** Creates a new ExampleSubsystem. */
   public DriveTrain() {
     this.backLeftMotor.setInverted(true);
@@ -44,11 +45,12 @@ public class DriveTrain extends SubsystemBase {
     this.frontLeftEncoder.setPositionConversionFactor(Constants.ConvertionFactorDrive);
     this.frontRightEncoder.setPositionConversionFactor(Constants.ConvertionFactorDrive);
     this.currentSpeed = Constants.Motor.maximumDriveSpeed;
-    this.slewRateLimiter = new SlewRateLimiter(Constants.Motor.slewRateLimit, -Constants.Motor.slewRateLimit, 0);
+    this.slewRateLimiterLeft = new SlewRateLimiter(Constants.Motor.slewRateLimit, -Constants.Motor.slewRateLimit, 0);
+    this.slewRateLimiterRight = new SlewRateLimiter(Constants.Motor.slewRateLimit, -Constants.Motor.slewRateLimit, 0);
   }
 
   public void drive(double left, double right){
-    driveTrain.tankDrive(applySpeed(left), applySpeed(right));
+    driveTrain.arcadeDrive(applySpeed(left, this.slewRateLimiterLeft), applySpeed(right, this.slewRateLimiterRight));
   }
 
   public void driveAuto(double left, double right){
@@ -71,8 +73,8 @@ public class DriveTrain extends SubsystemBase {
     driveTrain.tankDrive(left * -1, right * -1);
   }
   
-  private double applySpeed(double value){
-    return this.slewRateLimiter.calculate(this.currentSpeed*value);
+  private double applySpeed(double value, SlewRateLimiter slewRateLimiter){
+    return slewRateLimiter.calculate(this.currentSpeed*value);
   }
   
   public void resetPosition(){
