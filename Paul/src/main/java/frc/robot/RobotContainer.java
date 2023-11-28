@@ -17,8 +17,10 @@ import frc.robot.commands.Autos;
 import frc.robot.commands.BottomIntakeCommand;
 import frc.robot.commands.BottomOutputCommand;
 import frc.robot.commands.DriveCommand;
+import frc.robot.commands.DriveStraightCommand;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -55,6 +57,7 @@ public class RobotContainer {
     //m_driverController.button(kA).onTrue();
   }
 
+
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
    * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
@@ -65,6 +68,10 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
+
+    m_driverController.b().onTrue(new SequentialCommandGroup(new DriveStraightCommand(drive, 100, 0.25, 0.25).andThen( (new DriveStraightCommand(drive, -100, -0.25, -0.25)))));
+    m_driverController.y().onTrue(new DriveStraightCommand(drive, 100, 0.25, 0.25));
+    m_driverController.x().onTrue(new DriveStraightCommand(drive, -100, -0.25, -0.25));
 
     m_driverController.povUp().onTrue(new AdjustSpeedCommand(this.drive, Constants.Motor.driveSpeedStep));
     m_driverController.povDown().onTrue(new AdjustSpeedCommand(this.drive, -Constants.Motor.driveSpeedStep));
@@ -87,6 +94,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.exampleAuto(drive);
+   // return new SequentialCommandGroup(new DriveStraightCommand(drive, 15, 0.5, 0.5).andThen(new DriveStraightCommand(drive, -15, -0.5, -0.5)));
+    return Autos.DriveOutAuto(drive);
   }
 }

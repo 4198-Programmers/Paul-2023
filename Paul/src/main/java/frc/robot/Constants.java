@@ -36,4 +36,8 @@ public final class Constants {
   public static final double maximumBottomIntakeSpeed = 1.0f;
 
   }
+//change
+  public static final double diameterOfWheel = 8.5f;
+  public static final double ConvertionFactorDrive = 0.083;
+
 }

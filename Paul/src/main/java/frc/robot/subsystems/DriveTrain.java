@@ -40,14 +40,33 @@ public class DriveTrain extends SubsystemBase {
   public DriveTrain() {
     this.backLeftMotor.setInverted(true);
     this.frontLeftMotor.setInverted(true);
+    this.backLeftEncoder.setPositionConversionFactor(Constants.ConvertionFactorDrive);
+    this.backRightEncoder.setPositionConversionFactor(Constants.ConvertionFactorDrive);
+    this.frontLeftEncoder.setPositionConversionFactor(Constants.ConvertionFactorDrive);
+    this.frontRightEncoder.setPositionConversionFactor(Constants.ConvertionFactorDrive);
     this.currentSpeed = Constants.Motor.maximumDriveSpeed;
     this.slewRateLimiterLeft = new SlewRateLimiter(Constants.Motor.slewRateLimit, -Constants.Motor.slewRateLimit, 0);
     this.slewRateLimiterRight = new SlewRateLimiter(Constants.Motor.slewRateLimit, -Constants.Motor.slewRateLimit, 0);
   }
 
-
   public void drive(double left, double right){
     driveTrain.arcadeDrive(applySpeed(left, this.slewRateLimiterLeft), applySpeed(right, this.slewRateLimiterRight));
+  }
+
+  public void driveAuto(double left, double right){
+    frontLeftMotor.set(left);
+    frontRightMotor.set(right);
+    backLeftMotor.set(left);
+    backRightMotor.set(right);
+  }
+  public double drivePosition(){
+    return((frontRightEncoder.getPosition() + backRightEncoder.getPosition())/2d);
+  }
+
+  public double currentDistancePosition(){
+    double currentDistancePosition = (Math.PI)*(frontRightEncoder.getPosition())*(Constants.diameterOfWheel)*(Constants.ConvertionFactorDrive); 
+    double currentDistancePosition = (Math.PI)*(frontRightEncoder.getPosition())*(Constants.diameterOfWheel)*; 
+    return Math.round(currentDistancePosition);
   }
 
   public void driveInvert(double left, double right){
@@ -57,7 +76,15 @@ public class DriveTrain extends SubsystemBase {
   private double applySpeed(double value, SlewRateLimiter slewRateLimiter){
     return slewRateLimiter.calculate(this.currentSpeed*value);
   }
+  
+  public void resetPosition(){
+    frontLeftEncoder.setPosition(0);
+    frontRightEncoder.setPosition(0); 
+    backLeftEncoder.setPosition(0); 
+    backRightEncoder.setPosition(0);
+  }
 
+  
   /**
    * Example command factory method.
    *
